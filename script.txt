@@ -1,0 +1,12 @@
+var1 = 'Hello World'
+hh = "Hello World"
+my_number = 17
+my_float = 9.8
+kraft = TRUE
+var1 = 7.7
+print ("This is Working")
+print (kraft)
+table armas
+  espada
+  pistola
+  escudo
