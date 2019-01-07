@@ -6,7 +6,4 @@ kraft = TRUE
 var1 = 7.7
 print ("This is Working")
 print (kraft)
-table armas
-  espada
-  pistola
-  escudo
+table armas (espada, pistola, escudo)

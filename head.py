@@ -36,7 +36,8 @@ assign = {
 }
 
 errors = {
-    'var_not_found' : 'Variable does not exist'
+    'var_not_found' : 'Variable does not exist',
+    'error2' : 'Exception Bad Formatting'
 }
 core_engine = {
   "database" : False,
