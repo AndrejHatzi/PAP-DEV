@@ -43,11 +43,43 @@ def table_analysis(toEval, Kvars, indexing):
         elif '"' in (values[i]):
             values[i] = values[i].replace('"', '')
         else:
-            pass
+            if values[i] in Kvars:
+                values[i] = Kvars[values[i]][0]
         _db_header[indexing].append(values[i])
-    print(_db_header)
-            #if name in Kvars:
 
 
+def table_append_analysis(line, Kvars, indexing):
+    gate = line.index("(") + 1
+    backdoor = line.index(")")
+    toEval = line[gate:backdoor]
+    values = toEval.split(',')
+    _db_values[_db_header[indexing][0]] = []
+    for i in range(len(values)):
+        try:
+            values[i] = values[i].replace(' ', '')
+            values[i] = value[i].replace('\n', '')
+            #name = name.rstrip('\n')
+        except:
+            pass
+        if "'" in (values[i]):
+            values[i] = values[i].replace("'", '')
 
-    print(values)
+        elif '"' in (values[i]):
+            values[i] = values[i].replace('"', '')
+        else:
+            if values[i] in Kvars:
+                values[i] = Kvars[values[i]][0]
+        _db_values[_db_header[indexing][0]].append(values[i])
+    print(len(values))
+    print('@t',len(_db_header[indexing]))
+    strln = ''
+    if len(values) == (len(_db_header[indexing]) - 1):
+        for i in range(len(values)):
+            strln += str(values[i]) + ' '
+        print(values)
+        print(strln)
+        with open(core_engine['databaseValue'], 'a') as f:
+            f.write('\n')
+    else:
+        print(errors['error3'])
+        #with open(core_engine['databaseValue'], 'a') as f:
