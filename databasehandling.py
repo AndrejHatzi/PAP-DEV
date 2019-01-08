@@ -1,6 +1,5 @@
 from head import errors, core_engine
 
-
 _db_header = {
 
 }
@@ -8,6 +7,7 @@ _db_header = {
 _db_values = {
 
 }
+
 def startDatabase(name, Kvars):
     if (name[0] == '"'):
         name = name.replace('"', '')
@@ -47,6 +47,17 @@ def table_analysis(toEval, Kvars, indexing):
                 values[i] = Kvars[values[i]][0]
         _db_header[indexing].append(values[i])
 
+def seekOnFile(file, len_values, values, old_values):
+    with open(core_engine['database'], 'r') as f:
+        filedata = f.read()
+
+    for i in range(len_values):
+        filedata = replace(old_values[i], values[i])
+
+    with open(core_engine['database'], 'w') as f:
+        f.write(filedata)
+
+
 
 def table_append_analysis(line, Kvars, indexing):
     gate = line.index("(") + 1
@@ -57,29 +68,42 @@ def table_append_analysis(line, Kvars, indexing):
     for i in range(len(values)):
         try:
             values[i] = values[i].replace(' ', '')
-            values[i] = value[i].replace('\n', '')
-            #name = name.rstrip('\n')
         except:
             pass
+
         if "'" in (values[i]):
             values[i] = values[i].replace("'", '')
 
         elif '"' in (values[i]):
             values[i] = values[i].replace('"', '')
+        elif values[i] in Kvars:
+            values[i] = Kvars[values[i]][0]
+            try:
+                values[i] = values[i].replace('\n', '')
+            except:
+                pass
+        elif 'key=' in (values[0]):
+            pass
         else:
-            if values[i] in Kvars:
-                values[i] = Kvars[values[i]][0]
+            pass
+
         _db_values[_db_header[indexing][0]].append(values[i])
-    print(len(values))
-    print('@t',len(_db_header[indexing]))
-    strln = ''
+    strln = indexing + ' '
+    print(values)
     if len(values) == (len(_db_header[indexing]) - 1):
         for i in range(len(values)):
             strln += str(values[i]) + ' '
-        print(values)
-        print(strln)
-        with open(core_engine['databaseValue'], 'a') as f:
-            f.write('\n')
+
+        handshake = False
+        with open(core_engine['databaseValue'], 'r') as f:
+            if strln in f.read():
+                handshake = True
+
+        if (handshake == True):
+            pass
+        else:
+            with open(core_engine['databaseValue'], 'a') as f:
+                f.write(strln)
+                f.write('\n')
     else:
         print(errors['error3'])
-        #with open(core_engine['databaseValue'], 'a') as f:

@@ -8,9 +8,12 @@ Kvars = {
     "my_string" : ['otherDbFile', 'string']
 }
 def iteration(file):
+    l = 0
     with open(file) as f:
         for line in f:
+            l += 1
             cObject = line.split(' ')
+
             if (cObject[1] == keywords["variable"]):
                 EqualSignIndex = line.index("=") + 2
                 toEval = line[EqualSignIndex:]

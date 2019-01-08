@@ -1,6 +1,11 @@
 database my_string
 main_header = 'arco'
 current_weapon = 'lanca_espanhola'
+isTrue = TRUE
+isFalse = FALSE
+my_number = 19
 table armas (main_header, 'lancas', 'bestas', 'escudos')
 table madeira ('carvalho', "oliveira", 'sobreiro', 'pinheiro', "pinheiro_bravo", "palmeira")
 armas add ('arco_gaules', current_weapon, 'besta_inglesa', 'escudo_irlandes')
+armas add ('arco_chines', "lanca_grega", 'besta_do_monte', 'escudo_espartano')
+armas add ('arco_persa', 17.1, 28, my_number)

@@ -18,7 +18,26 @@ if ('=' in toAnalyse[1]):
     for K in my_dict:
         if (re.search(r'{}'.format(K), cString)):
             cString = cString.replace(" " + K + " ", str(my_dict[str(K)][0]))
+#----------------------------------------------------------------------------
+basename = os.path.basename(logfile)
+if basename.endswith('.txt'):
+    basename = os.path.splitext(basename)[0]
 
+with open('myfile.txt') as myfile:
+     if 'String' in myfile.read():
+         print('Blahblah')
+
+
+
+
+
+
+
+
+
+
+
+#-----------------------------------------------------------------------------
 
 
 #print(len(my_dict))
