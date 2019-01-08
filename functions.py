@@ -33,7 +33,7 @@ def hybrid_var_evaluation(Kvars, toEval):
     print('@t', toEval)
     for K in Kvars:
         if (re.search(r'{}'.format(K[0]), toEval)):
-            toEval = toEval.replace(" " + K[0] + " ", str(Kvars[K[0]]))
+            toEval = toEval.replace(" " + K + " ", str(Kvars[K][0]))
 
     print(toEval.strip())
     return(toEval.strip())

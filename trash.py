@@ -1,16 +1,30 @@
 import re
 
 my_dict = {
-    "var2" : 17,
-    "my_number" : '89',
-    "my_string" : '"Hello World"',
-    'random_number' : 90
+    "var2" : [17, 'integer'],
+    "my_number" : ['89', 'string'],
+    "my_string" : ['Hello World', 'string'],
+    'random_number' : [90.1, 'float'],
+    'isTrue' : ['TRUE', 'boolean']
 }
+q = sum("Hello", 'world')
+print(q)
+#analyse = ("var1 = (( var2 + 1 + 9.7 - 1 ) / random_number ) * 5 + var2 ");
+analyse = ("b = my_string + ', again' ")
+toAnalyse = analyse.split(' ')
+EqualSignIndex = analyse.index('=')
+if ('=' in toAnalyse[1]):
+    cString = analyse[EqualSignIndex+1:]
+    for K in my_dict:
+        if (re.search(r'{}'.format(K), cString)):
+            cString = cString.replace(" " + K + " ", str(my_dict[str(K)][0]))
+
+
 
 #print(len(my_dict))
 #for m in my_dict:
     #print(m)
-
+'''
 phrase = ("var1 = (( var2 + 1 + 9.7 - 1 ) / random_number ) * 5 + var2 ");
 toAnalyse = phrase.split(' ');
 EqualSignIndex = phrase.index('=')
@@ -27,3 +41,4 @@ if ('=' in toAnalyse[1]):
         #print('Raise Error')
 
 #print(my_dict)
+'''

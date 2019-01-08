@@ -7,7 +7,7 @@ keywords = {
   "variable":'=',
   "start":'start',
   "start_db" : 'database',
-  "init_table" : 'init',
+  "init_table" : 'table',
   "add_toTable" : 'add',
   "add_Unique" : 'uadd',
   "remove_fromTable" : 'remove',
@@ -39,9 +39,19 @@ errors = {
     'var_not_found' : 'Variable does not exist',
     'error2' : 'Exception Bad Formatting'
 }
+
 core_engine = {
   "database" : False,
   "mainWindow" : False,
   "init_table" : False,
   "databaseValue" : ''
   }
+
+config_file = {
+    'print_max_loop' : 10
+  }
+
+engine = {
+    'name' : '',
+    'version' : 0.9
+}

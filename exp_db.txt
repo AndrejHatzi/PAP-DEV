@@ -1,0 +1,2 @@
+database my_string
+table armas ('espadas', 'lancas', 'bestas', 'escudos')

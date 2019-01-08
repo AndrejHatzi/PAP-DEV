@@ -1,11 +1,11 @@
 from head import function_types, keywords, assign, errors, data_types
 from functions import var_evaluation, partial_print_evaluation, deep_var_evaluation, hybrid_var_evaluation
+from databasehandling import table_analysis, startDatabase
 import re
 KontrolFlow = []
 Kvars = {
-    "init" : 'TRUE',
-    "var2" : 5,
-    "randomtext" : ['Kittens r cool', data_types["string"]]
+    "init" : ['TRUE', 'boolean'],
+    "my_string" : ['otherDbFile', 'string']
 }
 def iteration(file):
     with open(file) as f:
@@ -44,7 +44,16 @@ def iteration(file):
                         valor = Kvars[toEval][0]
                 KontrolFlow.append([assign["print_call"], keywords["print"], valor])
 
+            if (cObject[0] == keywords["start_db"]):
+                startDatabase(cObject[1], Kvars)
 
-iteration('script2.txt')
+            if (cObject[0] == keywords["init_table"]):
+                gate = line.index("(") + 1
+                backdoor = line.index(")")
+                toEval = line[gate:backdoor]
+                valor = table_analysis(toEval, Kvars, cObject[1])
+
+
+iteration('exp_db.txt')
 print(KontrolFlow)
 print(Kvars)
