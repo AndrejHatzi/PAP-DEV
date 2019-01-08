@@ -1,6 +1,6 @@
 from head import function_types, keywords, assign, errors, data_types
 from functions import var_evaluation, partial_print_evaluation, deep_var_evaluation, hybrid_var_evaluation
-from databasehandling import table_analysis, startDatabase
+from databasehandling import table_analysis, startDatabase, table_append_analysis
 import re
 KontrolFlow = []
 Kvars = {
@@ -14,16 +14,16 @@ def iteration(file):
             if (cObject[1] == keywords["variable"]):
                 EqualSignIndex = line.index("=") + 2
                 toEval = line[EqualSignIndex:]
-                #print(toEval)
-                #type,valor = var_evaluation(toEval)
+                type,valor = var_evaluation(toEval)
                 if (cObject[0] in Kvars):
                     Kvars[cObject[0]] = [valor, type]
                     KontrolFlow.append([assign["change_value"], cObject[0], valor])
                 else:
                     toEval = line[EqualSignIndex-1:]
-                    #Kvars[cObject[0]] = [valor, type]
-                    #KontrolFlow.append([assign["assign_var"], cObject[0], valor])
-                    value = hybrid_var_evaluation(Kvars, toEval)
+                    Kvars[cObject[0]] = [valor, type]
+                    KontrolFlow.append([assign["assign_var"], cObject[0], valor])
+                    #-----------------------------------------------------------
+                    #value = hybrid_var_evaluation(Kvars, toEval)
                     '''
                     if (value == errors['error2']):
                         pass
@@ -52,6 +52,9 @@ def iteration(file):
                 backdoor = line.index(")")
                 toEval = line[gate:backdoor]
                 valor = table_analysis(toEval, Kvars, cObject[1])
+
+            if (cObject[1] == keywords["add_toTable"]):
+                table_append_analysis(line, Kvars, cObject[0])
 
 
 iteration('exp_db.txt')

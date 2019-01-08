@@ -1,2 +1,6 @@
 database my_string
-table armas ('espadas', 'lancas', 'bestas', 'escudos')
+main_header = 'arco'
+current_weapon = 'lanca_espanhola'
+table armas (main_header, 'lancas', 'bestas', 'escudos')
+table madeira ('carvalho', "oliveira", 'sobreiro', 'pinheiro', "pinheiro_bravo", "palmeira")
+armas add ('arco_gaules', current_weapon, 'besta_inglesa', 'escudo_irlandes')
