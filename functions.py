@@ -38,6 +38,56 @@ def hybrid_var_evaluation(Kvars, toEval):
     print(toEval.strip())
     return(toEval.strip())
 
+def continuous_var_evaluation(Kvars, line, lindex):
+    if ('"' in cString) or ("'" in cString):
+        for K in my_dict:
+            if (re.search(r'{}'.format(K), cString)):
+                cString = cString.replace(" " + K + " ", str(my_dict[str(K)][0]))
+            values = cString.split(',')
+            strln = ''
+            for e in range(len(values)):
+                if ("'") in values[e]:
+                    try:
+                        cp = values[e].index("'")
+                        try:
+                            cpp = values[e][cp+1:].index("'")
+                            strln += values[e][cp+1:-1]
+                        except:
+                            print('Error 2" on line', lindex);
+                    except:
+                        print('Error 1" on line', lindex);
+
+                elif ('"') in values[e]:
+                    try:
+                        cp = values[e].index("'")
+                        try:
+                            cpp = values[e][cp+1:].index("'")
+                            strln += values[e][cp+1:cpp-1]
+                        except:
+                            print('Error 2" on line', lindex)
+                    except:
+                        print('Error 1" on line', lindex)
+                else:
+                    strln += values[e]
+        my_dict[toAnalyse[0]] = [strln, 'string']
+    elif ('"' not in cString) or ("'" not in cString):
+        try:
+            EqualSignIndex = var_test.index('=')
+            cString = var_test[EqualSignIndex+1:]
+            cString = cString.replace(' ', '')
+        except:
+            pass
+        for K in my_dict:
+            if (re.search(r'{}'.format(K), cString)):
+                cString = cString.replace(K, str(my_dict[str(K)][0]))
+        hh = eval(str(cString))
+        my_dict[toAnalyse[0]] = hh #Para o body, retirar da func , eh atrbr d var
+    else:
+        print('Raise Error N7', lindex)
+
+    print(my_dict)
+
+
 
 def partial_print_evaluation(cObject):
     print(cObject)

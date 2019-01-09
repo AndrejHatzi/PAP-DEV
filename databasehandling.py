@@ -31,7 +31,7 @@ def startDatabase(name, Kvars):
 #d[year].append(month)
 def table_analysis(toEval, Kvars, indexing):
     values = toEval.split(',')
-    _db_header[indexing] = ['@2']
+    _db_header[indexing] = ['@2'] #Falta Implementar ==> Index Memory
     for i in range(len(values)):
         try:
             values[i] = values[i].replace(' ', '')
@@ -64,7 +64,7 @@ def table_append_analysis(line, Kvars, indexing):
     backdoor = line.index(")")
     toEval = line[gate:backdoor]
     values = toEval.split(',')
-    _db_values[_db_header[indexing][0]] = []
+    _db_values[_db_header[indexing][0]] = [] #Creates a empty list
     for i in range(len(values)):
         try:
             values[i] = values[i].replace(' ', '')
