@@ -1,5 +1,5 @@
 from head import function_types, keywords, assign, errors, data_types
-from functions import var_evaluation, partial_print_evaluation, deep_var_evaluation, hybrid_var_evaluation
+from functions import var_evaluation, partial_print_evaluation, deep_var_evaluation, hybrid_var_evaluation, continuous_var_evaluation
 from databasehandling import table_analysis, startDatabase, table_append_analysis
 import re
 KontrolFlow = []
@@ -13,7 +13,7 @@ def iteration(file):
         for line in f:
             l += 1
             cObject = line.split(' ')
-
+            print(cObject)
             if (cObject[1] == keywords["variable"]):
                 EqualSignIndex = line.index("=") + 2
                 toEval = line[EqualSignIndex:]
@@ -59,7 +59,10 @@ def iteration(file):
             if (cObject[1] == keywords["add_toTable"]):
                 table_append_analysis(line, Kvars, cObject[0])
 
+            if (cObject[0] == keywords["comment"]):
+                pass
 
-iteration('exp_db.txt')
+
+iteration('scripts/exp_db.txt')
 print(KontrolFlow)
 print(Kvars)

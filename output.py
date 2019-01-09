@@ -4,7 +4,7 @@ from tkinter import *
 
 window = Tk()
 window.title("Output Console")
-window.iconbitmap('icon.ico')
+window.iconbitmap('config/icon.ico')
 window.configure(background = "black")
 for i in range(len(KontrolFlow)):
     if KontrolFlow[i][0] == assign["print_call"]:

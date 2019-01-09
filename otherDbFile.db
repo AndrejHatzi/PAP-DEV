@@ -1,6 +1,2 @@
-armas arco_gaules lanca_espanhola besta_inglesa escudo_irlandes 
-armas arco_chines lanca_grega besta_do_monte escudo_espartano 
-armas arco_persa lanca_galega besta_bizantina escudo_arabe 
-armas arco_persa lanca_galega besta_bizantina 19 
-armas arco_persa lanca_galega 28 19 
-armas arco_persa 17.1 28 19 
+armas key=1 a b c d 
+armas 1 a b c d 

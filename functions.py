@@ -38,7 +38,13 @@ def hybrid_var_evaluation(Kvars, toEval):
     print(toEval.strip())
     return(toEval.strip())
 
+
+##Under Contruction##
 def continuous_var_evaluation(Kvars, line, lindex):
+    gate = line.index("(") + 1
+    backdoor = line.index(")")
+    cString = line[gate:backdoor]
+    toAnalyse = line.split(' ')
     if ('"' in cString) or ("'" in cString):
         for K in my_dict:
             if (re.search(r'{}'.format(K), cString)):
@@ -69,7 +75,8 @@ def continuous_var_evaluation(Kvars, line, lindex):
                         print('Error 1" on line', lindex)
                 else:
                     strln += values[e]
-        my_dict[toAnalyse[0]] = [strln, 'string']
+        return (strln, data_types['string'])
+        #my_dict[toAnalyse[0]] = [strln, 'string']
     elif ('"' not in cString) or ("'" not in cString):
         try:
             EqualSignIndex = var_test.index('=')
@@ -80,14 +87,17 @@ def continuous_var_evaluation(Kvars, line, lindex):
         for K in my_dict:
             if (re.search(r'{}'.format(K), cString)):
                 cString = cString.replace(K, str(my_dict[str(K)][0]))
-        hh = eval(str(cString))
-        my_dict[toAnalyse[0]] = hh #Para o body, retirar da func , eh atrbr d var
+        try:
+            value = eval(str(cString))
+        except:
+            pass
+        type, num_value = var_evaluation(value)
+        return (type, num_value)
+        #my_dict[toAnalyse[0]] = hh #Para o body, retirar da func , eh atrbr d var
     else:
         print('Raise Error N7', lindex)
 
     print(my_dict)
-
-
 
 def partial_print_evaluation(cObject):
     print(cObject)
