@@ -11,7 +11,8 @@ keywords = {
   "add_toTable" : 'add',
   "add_Unique" : 'uadd',
   "remove_fromTable" : 'remove',
-  "local_db" : 'local'
+  "local_db" : 'local',
+  "update" : 'update'
 }
 
 data_types = {
