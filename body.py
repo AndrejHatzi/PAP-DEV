@@ -62,7 +62,7 @@ def iteration(file):
                 add_to_table_function(line, Kvars, cObject[0])
 
             if (cObject[0] == keywords['update']):
-                update_table_function(line, cObject[1])
+                update_table_function(line, cObject[1], Kvars)
 
             #if (cObject[0][0] == keywords["comment"]):
             #    pass
@@ -73,4 +73,4 @@ def iteration(file):
 
 iteration('scripts/exp2_db.txt')
 #print(KontrolFlow)
-#print(Kvars)
+print(Kvars)

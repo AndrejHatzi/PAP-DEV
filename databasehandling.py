@@ -1,5 +1,6 @@
 from head import errors, core_engine
 import os
+import re
 _db_header = {
 
 }
@@ -52,7 +53,6 @@ def table_analysis(toEval, Kvars, indexing):
             pass
         if "'" in (values[i]):
             values[i] = values[i].replace("'", '')
-
         elif '"' in (values[i]):
             values[i] = values[i].replace('"', '')
         else:
@@ -95,7 +95,6 @@ def table_append_analysis(line, Kvars, indexing):
 
         if "'" in (values[i]):
             values[i] = values[i].replace("'", '')
-
         elif '"' in (values[i]):
             values[i] = values[i].replace('"', '')
         elif values[i] in Kvars:
@@ -217,9 +216,80 @@ def add_to_table_function(line, Kvars, table_name):
         _db_values[_db_header[table_name][0]].append(values[i])
     Exadd_to_table_function(_db_header,_db_values,values, table_name)
 
-def update_table_function(line, table_name):
+
+#----------------------------------------------------------------------------------------------------------------
+# I stopped Here! on 11/01/2019
+def update_table_function(line, table_name, Kvars):
     gate = line.index("(") + 1
     backdoor = line.index(")")
+    entry_door = line.index("{")
+    garden_door = line.index(",")
+    key = line[entry_door+1:garden_door]
     toChange = line[gate:backdoor]
-    print(toChange)
-    key = 'Null'
+    print(toChange,',',key)
+    print(key)
+    try:
+        key = key.replace(' ', '')
+    except:
+        pass
+    try:
+        valuestChange = toChange.Replace('"', '')
+    except:
+        pass
+    try:
+        valuestChange = toChange.replace("'", '')
+    except:
+        pass
+    try:
+        valuestChange = valuestChange.split(',')
+    except:
+        pass
+
+    print(valuestChange)
+    for e in range(len(valuestChange)):
+        try:
+            currentPairOFvalues = valuestChange[e].split('=')
+        except:
+            print('Error - not defined!')
+
+        for K in Kvars:
+            if (re.search(r'{}'.format(K), currentPairOFvalues[1])):
+                currentPairOFvalues[1] = Kvars[K][0]
+                try:
+                    currentPairOFvalues[1] = currentPairOFvalues[1].replace('\n', '')
+                except:
+                    pass
+                try:
+                    currentPairOFvalues[0] = currentPairOFvalues[0].replace(' ', '')
+                except:
+                    pass
+                if currentPairOFvalues[0] in _db_header[table_name]:
+                    log = [] # list on the go!
+                    with open(core_engine['databaseValue'], 'r') as f:
+                        for line in f:
+                            values = line.split(' ')
+                            print(values)
+                            for e in range(len(values)):
+                                if (values[0] == table_name):
+                                    pass
+
+        print(currentPairOFvalues)
+
+                            #if (values[0] == )
+
+
+        #print('-----------------')
+    #print(currentPairOFvalues)
+    print('#------#')
+    print(_db_header)
+    print(_db_values)
+    #(re.search(r'{}'.format(K), toEval))
+    '''
+    if "'" in (key[0]):
+        key[0] = key[0].replace("'", '')
+    elif '"' in (key[0]):
+        key[0] = key[0].replace('"', '')
+    elif key[0] in Kvars:
+        key[0] = Kvars[key[0]][0]
+    '''
+    #print(key)
