@@ -1,4 +1,4 @@
-database my_string
+database my_database
 main_header = 'arco'
 current_weapon = 'lanca_espanhola'
 isTrue = TRUE
